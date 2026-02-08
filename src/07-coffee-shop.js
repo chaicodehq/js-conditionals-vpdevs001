@@ -32,4 +32,24 @@
  */
 export function calculateCoffeePrice(size, type, extras = {}) {
   // Your code here
+  const availableSizes = { small: 3.0, medium: 4.0, large: 5.0 };
+  const coffeeTypes = { regular: 0.0, latte: 1.0, cappuccino: 1.5, mocha: 2.0 };
+  const extraFlavours = { whippedCream: 0.5, extraShot: 0.75 };
+
+  if (!(size in availableSizes)) return -1;
+  if (!(type in coffeeTypes)) return -1;
+
+  let sizeCost = availableSizes[size];
+  let typeCost = coffeeTypes[type];
+  let extraCost = 0;
+
+  for (const extra in extras) {
+    if (extra in extraFlavours) {
+      extraCost += extraFlavours[extra];
+    }
+  }
+
+  const totalPrice = parseFloat((sizeCost + typeCost + extraCost).toFixed(2));
+
+  return totalPrice;
 }
